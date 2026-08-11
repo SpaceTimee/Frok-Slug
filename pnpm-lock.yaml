@@ -1765,7 +1765,7 @@ packages:
     resolution: {integrity: sha512-MaxOwEoG1ntCFoKJsS7nqwgcxLW1SJw238AJwfJeaz3P/8GtkxXZsPPolsz1AdYvUTbe3XvqZ/VCdfjt+3zmKw==}
     peerDependencies:
       typescript: '>=5.0.0'
-      zod: ^3.0.0
+      zod: ^3.24.1
     peerDependenciesMeta:
       typescript:
         optional: true
@@ -1778,7 +1778,7 @@ packages:
     resolution: {integrity: sha512-rx2XL9+v6wtOqLNJbD5eD8OezKlQD1BtC0WvvtHwBgK66jnF5+wGqtgkKK4Ygie1LVmoDClths2T4tdFmRvGrQ==}
     peerDependencies:
       typescript: '>=5.0.0'
-      zod: ^3.0.0
+      zod: ^3.24.1
     peerDependenciesMeta:
       typescript:
         optional: true
