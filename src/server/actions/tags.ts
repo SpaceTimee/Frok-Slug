@@ -74,13 +74,9 @@ export const removeTag = async (tagId: string) => {
 
   const userId = currentUser.user.id;
 
-  await db.$executeRawUnsafe(`DELETE FROM "LinkTags" WHERE "tagId" = ?`, tagId);
+  await db.$executeRaw`DELETE FROM "LinkTags" WHERE "tagId" = ${tagId}`;
 
-  await db.$executeRawUnsafe(
-    `DELETE FROM "Tags" WHERE "id" = ? AND "creatorId" = ?`,
-    tagId,
-    userId,
-  );
+  await db.$executeRaw`DELETE FROM "Tags" WHERE "id" = ${tagId} AND "creatorId" = ${userId}`;
 
   revalidatePath("/");
 

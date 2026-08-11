@@ -151,13 +151,10 @@ export const deleteLink = async (id: string) => {
 
   const userId = currentUser.user.id;
 
-  await db.$executeRawUnsafe(`DELETE FROM "LinkTags" WHERE "linkId" = ?`, id);
+  await db.$executeRaw`DELETE FROM "LinkTags" WHERE "linkId" = ${id}`;
 
-  const result = await db.$executeRawUnsafe(
-    `DELETE FROM "Links" WHERE "id" = ? AND "creatorId" = ?`,
-    id,
-    userId,
-  );
+  const result =
+    await db.$executeRaw`DELETE FROM "Links" WHERE "id" = ${id} AND "creatorId" = ${userId}`;
 
   revalidatePath("/");
 

@@ -1,22 +1,14 @@
 "use client";
 
-import { handleSignOut } from "@/server/actions/auth";
+import { signOut } from "next-auth/react";
 import { DropdownMenuItem } from "@/ui/dropdown-menu";
 import { LogOutIcon } from "lucide-react";
-import { toast } from "sonner";
 
 export function SignOut() {
   const iconSize = 15;
 
-  const handleLogout = async () => {
-    toast.promise(handleSignOut, {
-      loading: "Signing out...",
-      error: "Failed to sign out. Please try again.",
-    });
-  };
-
   return (
-    <DropdownMenuItem onClick={handleLogout}>
+    <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/auth" })}>
       <LogOutIcon size={iconSize} />
       <span>Log Out</span>
     </DropdownMenuItem>

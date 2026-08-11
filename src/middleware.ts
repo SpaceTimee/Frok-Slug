@@ -16,10 +16,17 @@ import { urlFromServer } from "./server/middleware/redirect";
 
 const { auth } = NextAuth(authConfig);
 
+const ALLOWED_HOSTS = ["lnk.l.cd", "0k.l.cd"];
+
 export default auth(async (req) => {
   const { nextUrl } = req;
+  const host = req.headers.get("host") ?? "";
 
-  const isLoggedIn = !!req.auth;
+  const isAllowedHost =
+    process.env.NODE_ENV !== "production" ||
+    ALLOWED_HOSTS.some((h) => host.includes(h));
+
+  const isLoggedIn = isAllowedHost && !!req.auth;
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isCheckRoute = nextUrl.pathname.startsWith(checkRoutesPrefix);

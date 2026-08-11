@@ -63,17 +63,12 @@ export const {
       return true;
     },
     async session({ token, session }) {
-      if (token.sub && session.user) {
-        session.user.id = token.sub;
-      }
       if (session.user) {
-        session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
-      }
-
-      if (session.user) {
+        if (token.sub) session.user.id = token.sub;
         session.user.name = token.name;
         session.user.email = token.email!;
         session.user.isOAuth = token.isOAuth as boolean;
+        session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
         session.user.limitLinks = token.limitLinks as number;
         session.user.blocked = token.blocked as boolean;
       }
