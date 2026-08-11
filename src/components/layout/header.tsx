@@ -31,7 +31,7 @@ const Header = () => {
             >
               <Logo width={30} />
               <span className="self-center whitespace-nowrap text-lg font-medium tracking-tight dark:text-white">
-                slug
+                Frok Slug
               </span>
             </Link>
           </div>

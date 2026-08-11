@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { auth } from "@/auth";
 import { getLinksAndTagsByUser } from "@/server/queries";
 
 import CardLink from "@/components/links/card-link";
@@ -24,19 +25,14 @@ const DashboardPage = async ({
     tag?: string;
   };
 }) => {
-  const data = await getLinksAndTagsByUser();
+  const session = await auth();
+  const isLoggedIn = !!session?.user;
+
+  const data = isLoggedIn ? await getLinksAndTagsByUser() : null;
   const searchLink = searchParams?.search;
   const searchTag = searchParams?.tag;
 
-  if (!data) {
-    return <div>Error</div>;
-  }
-
-  if (!data?.links) {
-    return <div>Error</div>;
-  }
-
-  const filteredLinks = data.links.filter((link) => {
+  const filteredLinks = (data?.links ?? []).filter((link) => {
     if (!searchLink && !searchTag) return true;
 
     // Filter links by search slug
@@ -51,8 +47,9 @@ const DashboardPage = async ({
 
   return (
     <>
-      <IntroHero />
-      <main className="w-full duration-500 animate-in fade-in-5 slide-in-from-bottom-2">
+      <IntroHero isLoggedIn={isLoggedIn} />
+      {isLoggedIn && data && (
+        <main className="w-full duration-500 animate-in fade-in-5 slide-in-from-bottom-2">
         {data.userData?.blocked && <UserBlocked className="mb-3" />}
         <header className="mb-3 flex w-full items-center space-x-2 md:justify-between">
           <SearchLinks className="w-full md:w-72 md:max-w-72" />
@@ -113,6 +110,7 @@ const DashboardPage = async ({
           </div>
         )}
       </main>
+      )}
     </>
   );
 };
