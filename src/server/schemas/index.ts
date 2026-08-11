@@ -1,4 +1,11 @@
 import z from "zod";
+import {
+  publicRoutes,
+  authRoutes,
+  protectedRoutes,
+  apiAuthPrefix,
+  checkRoutesPrefix,
+} from "@/routes";
 
 export const LinkSchema = z.object({
   id: z.number(),
@@ -8,36 +15,47 @@ export const LinkSchema = z.object({
   tagId: z.number().optional(),
 });
 
+const isSystemReservedSlug = (slug: string) =>
+  [
+    ...publicRoutes,
+    ...authRoutes,
+    ...protectedRoutes,
+    apiAuthPrefix,
+    checkRoutesPrefix,
+  ].some((r) => r.split("/")[1]?.toLowerCase() === slug.toLowerCase().trim());
+
 export const CreateLinkSchema = z.object({
   url: z
     .string()
     .min(1, { message: "URL is required." })
     .url({
-      message: "Please enter a valid URL. Include http:// or https://",
+      message: "Please enter a valid URL (e.g. https://example.com).",
     })
     .regex(/^(?!.*(?:http|https):\/\/(?:lnk\.l\.cd|0k\.l\.cd)).*$/, {
-      message: "You cannot redirect to the Frok Slug url.",
+      message: "Cannot redirect to a Frok Slug URL.",
     })
-    // not contain any blank spaces
     .regex(/^\S+$/, {
-      message: "URL must not contain any blank spaces.",
+      message: "URL cannot contain spaces.",
     }),
   slug: z
     .string()
     .min(4, {
-      message: "Short link is required and must be at least 4 characters long.",
+      message: "Short link must be at least 4 characters.",
     })
     .regex(/^[a-zA-Z0-9_-]*$/, {
       message:
-        "Custom short link must not contain any blank spaces or special characters.",
+        "Short link can only contain letters, numbers, hyphens, and underscores.",
     })
     .regex(/^(?!.*&c$)/, {
-      message: "Custom short link can't end with &c.",
+      message: "Short link cannot end with &c.",
+    })
+    .refine((val) => !isSystemReservedSlug(val), {
+      message: "This short link is reserved by the system.",
     }),
 
   description: z
     .string()
-    .max(100, { message: "The description must be less than 100 characters." }),
+    .max(100, { message: "Description cannot exceed 100 characters." }),
 });
 
 export const EditLinkSchema = z.object({
@@ -46,30 +64,33 @@ export const EditLinkSchema = z.object({
     .string()
     .min(1, { message: "URL is required." })
     .regex(/^(?!.*(?:http|https):\/\/(?:lnk\.l\.cd|0k\.l\.cd)).*$/, {
-      message: "You cannot redirect to the Frok Slug url.",
+      message: "Cannot redirect to a Frok Slug URL.",
     })
-    // not contain any blank spaces
     .regex(/^\S+$/, {
-      message: "URL must not contain any blank spaces.",
+      message: "URL cannot contain spaces.",
     }),
   slug: z
     .string()
     .min(4, {
-      message: "Short link is required and must be at least 4 characters long.",
+      message: "Short link must be at least 4 characters.",
     })
     .regex(/^[a-zA-Z0-9_-]*$/, {
-      message: "Custom short link must not contain any blank spaces.",
+      message:
+        "Short link can only contain letters, numbers, hyphens, and underscores.",
     })
     .regex(/^(?!.*&c$)/, {
-      message: "Custom short link can't end with &c.",
+      message: "Short link cannot end with &c.",
+    })
+    .refine((val) => !isSystemReservedSlug(val), {
+      message: "This short link is reserved by the system.",
     }),
   description: z
     .string()
-    .max(100, { message: "The description must be less than 100 characters." }),
+    .max(100, { message: "Description cannot exceed 100 characters." }),
 });
 
 export const DeleteLinkSchema = z.object({
-  slug: z.string().min(1, { message: "Slug is required." }),
+  slug: z.string().min(1, { message: "Short link is required." }),
 });
 
 export const getSingleLinkSchema = z.object({
@@ -77,18 +98,20 @@ export const getSingleLinkSchema = z.object({
 });
 
 export const CreateTagSchema = z.object({
-  name: z.string().min(1, { message: "Tag name is required." }).max(15, {
-    message: "Tag name must be less than 15 characters.",
-  }),
+  name: z
+    .string()
+    .min(1, { message: "Tag name is required." })
+    .max(15, { message: "Tag name cannot exceed 15 characters." }),
   color: z.string().min(1, { message: "Tag color is required." }),
 });
 
 export const UpdateProfileSchema = z.object({
-  name: z.string().min(1, { message: "Name is required." }).max(40, {
-    message: "Name must be less than 40 characters.",
-  }),
+  name: z
+    .string()
+    .min(1, { message: "Name is required." })
+    .max(40, { message: "Name cannot exceed 40 characters." }),
   username: z.string().optional(),
-  email: z.string().email({ message: "Invalid email address." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
 });
 
 export type LinkSchema = z.TypeOf<typeof LinkSchema>;
