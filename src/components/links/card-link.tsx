@@ -42,7 +42,7 @@ const CardLink = ({ linkInfo, linkTags, tagsInfo }: CardLinkProps) => {
   );
 
   return (
-    <div className="flex w-full flex-col rounded-md border border-neutral-200 p-3 shadow-sm dark:border-neutral-800">
+    <div className="flex w-full flex-col rounded-md border border-neutral-200 bg-white p-3 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
       <div className="mb-1 flex w-full items-center justify-between space-x-2">
         <ExternalLink
           href={`/${linkInfo.slug}`}
