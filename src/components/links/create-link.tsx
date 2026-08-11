@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import JSConfetti from "js-confetti";
 
 import { checkIfSlugExist, createLink } from "@/server/actions/links";
+import { insertTagToLink } from "@/server/actions/tags";
 
 import Alert from "@/ui/alert";
 import { Button } from "@/ui/button";
@@ -103,6 +104,14 @@ export function CreateLink(props: CreateLinkProps) {
       if (result.error && result.limit) {
         toast.info(result.error);
         return;
+      }
+
+      if (selectedTags.length > 0 && result.linkId) {
+        await Promise.all(
+          selectedTags.map(async (tag) => {
+            await insertTagToLink(result.linkId!, tag);
+          }),
+        );
       }
 
       toast.success("Link created successfully!", {

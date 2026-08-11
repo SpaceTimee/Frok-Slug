@@ -35,14 +35,6 @@ export const protectedRoutes = ["/settings"];
 export const checkRoutesPrefix = "/check";
 
 /**
- * 🌱 These routes are used for the redirect slug.
- * ✍️ Only type the prefix, with "/".
- * 🔓 Not required for authentication.
- * @type {string}
- */
-export const redirectRoutesPrefix = "/redirect";
-
-/**
  * 🌱 These prefix for API authentication routes.
  * ✍️ Routes that start with this prefix are used for API authentication purposes.
  * 🔓 Not required for authentication.

@@ -67,16 +67,20 @@ export const insertTagToLink = async (linkId: string, tagId: string) => {
 export const removeTag = async (tagId: string) => {
   const currentUser = await auth();
 
-  if (!currentUser) {
+  if (!currentUser?.user?.id) {
     console.error("Not authenticated.");
     return null;
   }
 
-  await db.tags.delete({
-    where: {
-      id: tagId,
-    },
-  });
+  const userId = currentUser.user.id;
+
+  await db.$executeRawUnsafe(`DELETE FROM "LinkTags" WHERE "tagId" = ?`, tagId);
+
+  await db.$executeRawUnsafe(
+    `DELETE FROM "Tags" WHERE "id" = ? AND "creatorId" = ?`,
+    tagId,
+    userId,
+  );
 
   revalidatePath("/");
 

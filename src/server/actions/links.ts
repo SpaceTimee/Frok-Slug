@@ -144,15 +144,20 @@ export const updateLink = async (values: z.infer<typeof EditLinkSchema>) => {
 export const deleteLink = async (id: string) => {
   const currentUser = await auth();
 
-  if (!currentUser) {
+  if (!currentUser?.user?.id) {
     console.error("Not authenticated.");
     return null;
   }
 
-  // Update link:
-  const result = await db.links.delete({
-    where: { id: id, creatorId: currentUser.user?.id },
-  });
+  const userId = currentUser.user.id;
+
+  await db.$executeRawUnsafe(`DELETE FROM "LinkTags" WHERE "linkId" = ?`, id);
+
+  const result = await db.$executeRawUnsafe(
+    `DELETE FROM "Links" WHERE "id" = ? AND "creatorId" = ?`,
+    id,
+    userId,
+  );
 
   revalidatePath("/");
 
