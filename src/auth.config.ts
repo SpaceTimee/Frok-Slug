@@ -22,6 +22,7 @@ const createCookie = (name: string, httpOnly = true) => ({
 });
 
 export default {
+  trustHost: true,
   cookies: {
     sessionToken: createCookie("authjs.session-token"),
     callbackUrl: createCookie("authjs.callback-url", false),
@@ -35,6 +36,7 @@ export default {
     Github({
       clientId: env.GITHUB_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
+      redirectProxyUrl: isProd ? "https://lnk.l.cd/api/auth" : undefined,
     }),
   ],
 } satisfies NextAuthConfig;
