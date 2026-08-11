@@ -29,22 +29,22 @@ const DashboardPage = async ({
   const isLoggedIn = !!session?.user;
 
   const data = isLoggedIn ? await getLinksAndTagsByUser() : null;
-  const searchLink = searchParams?.search;
+  const searchLink = searchParams?.search?.toLowerCase();
   const searchTag = searchParams?.tag;
 
-  const filteredLinks = (data?.links ?? []).filter((link: LinkWithTags) => {
-    if (!searchLink && !searchTag) return true;
+  const filteredLinks = [...(data?.links ?? [])]
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+    )
+    .filter((link: LinkWithTags) => {
+      const matchSlug = !searchLink || link.slug.toLowerCase().includes(searchLink);
+      const matchTag =
+        !searchTag ||
+        link.tags.some((tag: { tagId: string }) => tag.tagId === searchTag);
 
-    // Filter links by search slug
-    const matchSlug =
-      !searchLink || link.slug.toLowerCase().includes(searchLink.toLowerCase());
-
-    // Filter links by search tag
-    const matchTag =
-      !searchTag || link.tags.some((tag: { tagId: string }) => tag.tagId === searchTag);
-
-    return matchSlug && matchTag;
-  });
+      return matchSlug && matchTag;
+    });
 
   return (
     <>
@@ -70,22 +70,16 @@ const DashboardPage = async ({
           </div>
         </header>
         <div className="grid grid-cols-1 gap-2 md:grid-cols-1 lg:grid-cols-2">
-          {filteredLinks
-            .sort((a: LinkWithTags, b: LinkWithTags) => {
-              return (
-                new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-              );
-            })
-            .map((link: LinkWithTags) => {
-              return (
-                <CardLink
-                  key={link.id}
-                  linkInfo={link}
-                  linkTags={link.tags}
-                  tagsInfo={data.tags}
-                />
-              );
-            })}
+          {filteredLinks.map((link: LinkWithTags) => {
+            return (
+              <CardLink
+                key={link.id}
+                linkInfo={link}
+                linkTags={link.tags}
+                tagsInfo={data.tags}
+              />
+            );
+          })}
         </div>
         {filteredLinks.length === 0 && (
           <div className="mt-4 flex flex-col items-center justify-center space-y-3 text-center">

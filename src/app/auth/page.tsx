@@ -20,7 +20,7 @@ const AuthLoginPage = () => {
           Log in to Frok Slug
         </CardTitle>
         <CardDescription className="duration-500 animate-in fade-in-30">
-          Log in with your favorite social provider to get started:
+          Log in with your favorite social provider to get started
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4 duration-500 animate-in fade-in-30">

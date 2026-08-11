@@ -52,7 +52,7 @@ const EditLink = (props: EditLinkProps) => {
   // Main form:
   const form = useForm<z.infer<typeof EditLinkSchema>>({
     resolver: zodResolver(EditLinkSchema),
-    defaultValues: {
+    values: {
       id: props.link.id,
       url: props.link.url,
       slug: props.link.slug,
