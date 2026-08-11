@@ -1,12 +1,24 @@
 import { cache } from "react";
 import { auth } from "@/auth";
 import { db } from "@/server/db";
+import type { Prisma, User } from "@prisma/client";
+
+export type LinkWithTags = Prisma.LinksGetPayload<{
+  include: { tags: true };
+}>;
+
+export interface LinksAndTagsResult {
+  limit?: number;
+  links: LinkWithTags[];
+  tags: Prisma.TagsGetPayload<object>[];
+  userData?: Partial<User>;
+}
 
 /**
  * Get links with tags by user.
  * Authentication required.
  */
-export const getLinksAndTagsByUser = cache(async () => {
+export const getLinksAndTagsByUser = cache(async (): Promise<LinksAndTagsResult | null> => {
   const currentUser = await auth();
 
   if (!currentUser) {

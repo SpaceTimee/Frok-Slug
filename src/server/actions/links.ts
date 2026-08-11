@@ -16,14 +16,15 @@ import { revalidatePath } from "next/cache";
 export const getSingleLink = async (id: string) => {
   const currentUser = await auth();
 
-  if (!currentUser) {
+  if (!currentUser?.user?.id) {
     console.error("Not authenticated.");
     return null;
   }
 
-  const result = await db.links.findUnique({
+  const result = await db.links.findFirst({
     where: {
       id,
+      creatorId: currentUser.user.id,
     },
   });
 

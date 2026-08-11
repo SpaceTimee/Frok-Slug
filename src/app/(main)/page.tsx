@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { auth } from "@/auth";
-import { getLinksAndTagsByUser } from "@/server/queries";
+import { getLinksAndTagsByUser, type LinkWithTags } from "@/server/queries";
 
 import CardLink from "@/components/links/card-link";
 import SearchLinks from "@/components/links/search-link";
@@ -32,15 +32,16 @@ const DashboardPage = async ({
   const searchLink = searchParams?.search;
   const searchTag = searchParams?.tag;
 
-  const filteredLinks = (data?.links ?? []).filter((link) => {
+  const filteredLinks = (data?.links ?? []).filter((link: LinkWithTags) => {
     if (!searchLink && !searchTag) return true;
 
     // Filter links by search slug
-    const matchSlug = !searchLink || link.slug.includes(searchLink);
+    const matchSlug =
+      !searchLink || link.slug.toLowerCase().includes(searchLink.toLowerCase());
 
     // Filter links by search tag
     const matchTag =
-      !searchTag || link.tags.some((tag) => tag.tagId === searchTag);
+      !searchTag || link.tags.some((tag: { tagId: string }) => tag.tagId === searchTag);
 
     return matchSlug && matchTag;
   });
@@ -54,7 +55,7 @@ const DashboardPage = async ({
         <header className="mb-3 flex w-full items-center space-x-2 md:justify-between">
           <SearchLinks className="w-full md:w-72 md:max-w-72" />
           <div className="flex items-center space-x-2">
-            <LinksLimit userLinks={data.links.length} maxLinks={data.limit} />
+            <LinksLimit userLinks={data.links.length} maxLinks={data.limit ?? 30} />
             <SearchTag
               tags={data.tags}
               tagSelected={searchTag!}
@@ -70,12 +71,12 @@ const DashboardPage = async ({
         </header>
         <div className="grid grid-cols-1 gap-2 md:grid-cols-1 lg:grid-cols-2">
           {filteredLinks
-            .sort((a, b) => {
+            .sort((a: LinkWithTags, b: LinkWithTags) => {
               return (
                 new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
               );
             })
-            .map((link) => {
+            .map((link: LinkWithTags) => {
               return (
                 <CardLink
                   key={link.id}
