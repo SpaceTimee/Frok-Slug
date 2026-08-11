@@ -105,7 +105,7 @@ export function CreateLink(props: CreateLinkProps) {
         return;
       }
 
-      toast.success("Creation link disabled for now.", {
+      toast.success("Link created successfully!", {
         duration: 10000,
         closeButton: true,
       });
@@ -113,7 +113,7 @@ export function CreateLink(props: CreateLinkProps) {
       form.reset();
       setOpen(false);
       await generateConfetti();
-    } catch (error) {
+    } catch {
       toast.error("An unexpected error has occurred. Please try again later.");
     } finally {
       setError(false);

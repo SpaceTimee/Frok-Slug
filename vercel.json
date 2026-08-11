@@ -2,11 +2,11 @@
   "redirects": [
     {
       "source": "/git",
-      "destination": "https://github.com/pheralb/slug"
+      "destination": "https://github.com/SpaceTimee/Frok-Slug"
     },
     {
       "source": "/dash",
-      "destination": "/dashboard"
+      "destination": "/"
     },
     {
       "source": "/docs",

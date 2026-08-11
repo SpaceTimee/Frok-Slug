@@ -8,9 +8,6 @@ import { cn } from "@/utils";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ToasterComponent } from "@/components/providers/toaster";
 
-// External scripts:
-import Script from "next/script";
-
 // Layout:
 import Header from "@/components/layout/header";
 
@@ -35,10 +32,10 @@ const geistMonoVariable = localFont({
 
 // Metadata:
 export const metadata: Metadata = {
-  metadataBase: new URL("https://slug.vercel.app"),
+  metadataBase: new URL("https://lnk.l.cd"),
   title: {
-    default: "Slug - A beautifully open-source URL shortener",
-    template: "%s - Slug",
+    default: "Frok-Slug - A Fork from Slug",
+    template: "%s - Frok-Slug",
   },
   manifest: "/manifest.json",
   icons: [
@@ -61,12 +58,12 @@ export const metadata: Metadata = {
       url: "/images/apple-touch-icon.png",
     },
   ],
-  description: "An open-source URL shortener built with T3 Stack.",
+  description: "A Fork from Slug",
   openGraph: {
-    title: "Slug",
-    description: "An beautifully open-source URL shortener",
-    url: "https://slug.vercel.app/images/og_image.png",
-    siteName: "Slug - An beautifully open-source URL shortener",
+    title: "Frok-Slug",
+    description: "A Fork from Slug",
+    url: "https://lnk.l.cd/images/og_image.png",
+    siteName: "Frok-Slug - A Fork from Slug",
     locale: "en_US",
     type: "website",
   },
@@ -82,7 +79,7 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: "Slug - An beautifully open-source URL shortener",
+    title: "Frok-Slug - A Fork from Slug",
     card: "summary_large_image",
   },
 };
@@ -117,11 +114,6 @@ export default function RootLayout({
           {children}
           <ToasterComponent />
         </ThemeProvider>
-        <Script
-          async
-          src="https://umami.pheralb.dev/script.js"
-          data-website-id="2495697e-383c-418c-ac85-d8be8837b686"
-        />
       </body>
     </html>
   );

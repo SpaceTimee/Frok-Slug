@@ -1,4 +1,3 @@
-import Footer from "@/components/layout/footer";
 import { cn } from "@/utils";
 import type { ReactNode } from "react";
 
@@ -8,18 +7,16 @@ interface AuthLayoutProps {
 
 const AuthLayout = (props: AuthLayoutProps) => {
   return (
-    <>
-      <main
-        className={cn(
-          "mt-20 flex w-full flex-col items-center justify-center space-y-8",
-        )}
-      >
-        <div className="flex flex-col items-center justify-center">
-          {props.children}
-        </div>
-      </main>
-      <Footer className="fixed bottom-0 py-4" />
-    </>
+    <main
+      className={cn(
+        "relative flex min-h-[calc(100vh-4rem)] w-full flex-col items-center justify-center space-y-8 pt-10",
+      )}
+    >
+      <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] dark:bg-neutral-900"></div>
+      <div className="flex flex-col items-center justify-center">
+        {props.children}
+      </div>
+    </main>
   );
 };
 

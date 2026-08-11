@@ -45,7 +45,7 @@ const UpdateNameAvatar = (props: UpdateNameAvatarProps) => {
       setLoading(true);
       await updateProfile(values);
       toast.success("Profile updated successfully.");
-    } catch (error) {
+    } catch {
       toast.error("An unexpected error has occurred. Please try again later.");
     } finally {
       setLoading(false);

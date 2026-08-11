@@ -23,7 +23,7 @@ const DownloadAllLinks = () => {
       a.click();
       URL.revokeObjectURL(url);
       toast.success("Links exported successfully.");
-    } catch (error) {
+    } catch {
       toast.error("Failed to download links.");
     } finally {
       setIsLoading(false);

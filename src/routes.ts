@@ -3,7 +3,7 @@
  * 🔓 Not required for authentication.
  * @type {string[]}
  */
-export const publicRoutes = ["/", "/docs", "verify", "/check"];
+export const publicRoutes = ["/docs", "/verify", "/check"];
 
 /**
  * 🌱 These routes are used for authentication.
@@ -24,7 +24,7 @@ export const authRoutes = [
  * 🔒 Required authentication.
  * @type {string[]}
  */
-export const protectedRoutes = ["/dashboard", "/dashboard/settings"];
+export const protectedRoutes = ["/", "/settings"];
 
 /**
  * 🌱 These routes are used for the check slug.
@@ -55,4 +55,4 @@ export const apiAuthPrefix = "/api/auth";
  * 🔓 Not required for authentication.
  * @type {string}
  */
-export const DEFAULT_LOGIN_REDIRECT_URL = "/dashboard";
+export const DEFAULT_LOGIN_REDIRECT_URL = "/";

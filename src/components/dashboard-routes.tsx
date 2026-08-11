@@ -8,12 +8,12 @@ import { cn } from "@/utils";
 const DashboardRoutes = [
   {
     title: "Links",
-    path: "/dashboard",
+    path: "/",
     icon: Link2Icon,
   },
   {
     title: "Settings",
-    path: "/dashboard/settings",
+    path: "/settings",
     icon: SettingsIcon,
   },
 ];

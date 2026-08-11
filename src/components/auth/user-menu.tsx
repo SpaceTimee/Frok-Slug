@@ -4,12 +4,10 @@ import { DropdownMenuItem } from "@/ui/dropdown-menu";
 import {
   ArrowUpRight,
   BugIcon,
-  HomeIcon,
-  LayoutDashboardIcon,
+  Mail,
   SettingsIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { XLogo } from "@/components/icons/logos";
 
 const UserMenu = () => {
   const iconSize = 15;
@@ -17,19 +15,7 @@ const UserMenu = () => {
   return (
     <>
       <DropdownMenuItem asChild>
-        <Link href="/">
-          <HomeIcon size={iconSize} />
-          <span>Home</span>
-        </Link>
-      </DropdownMenuItem>
-      <DropdownMenuItem asChild>
-        <Link href="/dashboard">
-          <LayoutDashboardIcon size={iconSize} />
-          <span>Dashboard</span>
-        </Link>
-      </DropdownMenuItem>
-      <DropdownMenuItem asChild>
-        <Link href="/dashboard/settings">
+        <Link href="/settings">
           <SettingsIcon size={iconSize} />
           <span>Settings</span>
         </Link>
@@ -39,7 +25,7 @@ const UserMenu = () => {
         className="flex w-full items-center justify-between"
       >
         <Link
-          href="https://github.com/pheralb/slug/issues/new/choose"
+          href="https://github.com/SpaceTimee/Frok-Slug/issues/new/choose"
           target="_blank"
         >
           <div className="flex items-center space-x-3">
@@ -53,9 +39,9 @@ const UserMenu = () => {
         asChild
         className="flex w-full items-center justify-between"
       >
-        <Link href="https://twitter.com/pheralb_" target="_blank">
+        <Link href="mailto:Zeus6_6@163.com" target="_blank">
           <div className="flex items-center space-x-3">
-            <XLogo width={iconSize} />
+            <Mail size={iconSize} />
             <span>Contact</span>
           </div>
           <ArrowUpRight size={iconSize} className="opacity-40" />

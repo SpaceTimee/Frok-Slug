@@ -1,8 +1,7 @@
 import {
   BugIcon,
   HeartHandshakeIcon,
-  HomeIcon,
-  LayoutDashboardIcon,
+  Mail,
   MonitorIcon,
   MoonIcon,
   SettingsIcon,
@@ -10,22 +9,12 @@ import {
   SunIcon,
   TelescopeIcon,
 } from "lucide-react";
-import { GithubLogo, XLogo } from "@/components/icons/logos";
+import { GithubLogo } from "@/components/icons/logos";
 
 export const Pages = [
   {
-    name: "Home",
-    href: "/",
-    icon: HomeIcon,
-  },
-  {
-    name: "Dashboard",
-    href: "/dashboard",
-    icon: LayoutDashboardIcon,
-  },
-  {
     name: "Settings",
-    href: "/dashboard/settings",
+    href: "/settings",
     icon: SettingsIcon,
   }
 ];
@@ -51,35 +40,35 @@ export const ChangeTheme = [
 export const DocumentationPages = [
   {
     name: "Getting Started",
-    href: "https://github.com/pheralb/slug?tab=readme-ov-file#-getting-started",
+    href: "https://github.com/SpaceTimee/Frok-Slug?tab=readme-ov-file#-getting-started",
     icon: SproutIcon,
   },
   {
     name: "Roadmap",
-    href: "https://github.com/pheralb/slug?tab=readme-ov-file#-roadmap",
+    href: "https://github.com/SpaceTimee/Frok-Slug?tab=readme-ov-file#-roadmap",
     icon: TelescopeIcon,
   },
   {
     name: "Contributing",
-    href: "https://github.com/pheralb/slug?tab=readme-ov-file#%EF%B8%8F-contributing",
+    href: "https://github.com/SpaceTimee/Frok-Slug?tab=readme-ov-file#%EF%B8%8F-contributing",
     icon: HeartHandshakeIcon,
   },
   {
     name: "Report a Bug",
-    href: "https://github.com/pheralb/slug/issues/new/choose",
+    href: "https://github.com/SpaceTimee/Frok-Slug/issues/new/choose",
     icon: BugIcon,
   }
 ];
 
 export const SocialPages = [
   {
-    name: "X (Formerly Twitter)",
-    href: "https://twitter.com/pheralb_",
-    icon: XLogo,
+    name: "Contact",
+    href: "mailto:Zeus6_6@163.com",
+    icon: Mail,
   },
   {
-    name: "GitHub Repository",
-    href: "https://github.com/pheralb/slug",
+    name: "GitHub",
+    href: "https://github.com/SpaceTimee/Frok-Slug",
     icon: GithubLogo,
   },
 ];

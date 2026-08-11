@@ -105,7 +105,6 @@ export const createLink = async (
   });
 
   revalidatePath("/");
-  revalidatePath("/dashboard");
 
   return { limit: false, linkId: result.id };
 };
@@ -133,7 +132,6 @@ export const updateLink = async (values: z.infer<typeof EditLinkSchema>) => {
   });
 
   revalidatePath("/");
-  revalidatePath("/dashboard");
 
   return;
 };
@@ -156,7 +154,7 @@ export const deleteLink = async (id: string) => {
     where: { id: id, creatorId: currentUser.user?.id },
   });
 
-  revalidatePath("/dashboard");
+  revalidatePath("/");
 
   return result;
 };
@@ -179,13 +177,9 @@ export const downloadAllLinks = async () => {
       creatorId: currentUser.user?.id,
     },
   });
-
-  return result.map((link) => {
-    const { slug, url, createdAt } = link;
-    return { slug, url, createdAt } as {
-      slug: string;
-      url: string;
-      createdAt: Date;
-    };
-  });
+  return result.map(({ slug, url, createdAt }) => ({
+    slug,
+    url,
+    createdAt,
+  }));
 };

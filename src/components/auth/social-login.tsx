@@ -36,7 +36,7 @@ const SocialLogin = () => {
         // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
         callbackUrl: callbackUrl || DEFAULT_LOGIN_REDIRECT_URL,
       });
-    } catch (error) {
+    } catch {
       toast.error("An error occurred while trying to sign in");
     }
   };

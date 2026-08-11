@@ -15,8 +15,8 @@ export const CreateLinkSchema = z.object({
     .url({
       message: "Please enter a valid URL. Include http:// or https://",
     })
-    .regex(/^(?!.*(?:http|https):\/\/(?:slug|slugr)\.vercel\.app).*$/, {
-      message: "You cannot redirect to the Slug url.",
+    .regex(/^(?!.*(?:http|https):\/\/(?:lnk\.l\.cd|0k\.l\.cd)).*$/, {
+      message: "You cannot redirect to the Frok Slug url.",
     })
     // not contain any blank spaces
     .regex(/^\S+$/, {
@@ -45,8 +45,8 @@ export const EditLinkSchema = z.object({
   url: z
     .string()
     .min(1, { message: "URL is required." })
-    .regex(/^(?!.*(?:http|https):\/\/(?:slug|slugr)\.vercel\.app).*$/, {
-      message: "You cannot redirect to the Slug url.",
+    .regex(/^(?!.*(?:http|https):\/\/(?:lnk\.l\.cd|0k\.l\.cd)).*$/, {
+      message: "You cannot redirect to the Frok Slug url.",
     })
     // not contain any blank spaces
     .regex(/^\S+$/, {

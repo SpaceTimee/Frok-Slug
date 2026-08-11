@@ -30,7 +30,6 @@ export const createTag = async (values: z.infer<typeof CreateTagSchema>) => {
   });
 
   revalidatePath("/");
-  revalidatePath("/dashboard");
 
   return result;
 };

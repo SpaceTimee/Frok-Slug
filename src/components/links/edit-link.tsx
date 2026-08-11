@@ -76,13 +76,13 @@ const EditLink = (props: EditLinkProps) => {
 
       // If not any changes in the tags, return:
       toast.success("Link edited successfully.", {
-        description: `Url: https://slug.vercel.app/${values.slug}`,
+        description: `Url: ${typeof window !== "undefined" ? window.location.origin : "https://lnk.l.cd"}/${values.slug}`,
         duration: 10000,
         closeButton: true,
       });
       form.reset();
       setOpen(false);
-    } catch (error) {
+    } catch {
       toast.error("An unexpected error has occurred. Please try again later.");
     } finally {
       setError(false);

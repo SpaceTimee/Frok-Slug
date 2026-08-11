@@ -3,7 +3,6 @@ import { cn } from "@/utils";
 
 import { buttonVariants } from "@/ui/button";
 import ExternalLink from "@/ui/external-link";
-import { Badge } from "@/ui/badge";
 
 import { ModeToggle } from "@/components/change-theme";
 import UserButton from "@/components/auth/user-btn";
@@ -34,13 +33,12 @@ const Header = () => {
               <span className="self-center whitespace-nowrap text-lg font-medium tracking-tight dark:text-white">
                 slug
               </span>
-              <Badge className="hidden cursor-pointer md:block">beta</Badge>
             </Link>
           </div>
         </div>
         <div className="flex items-center space-x-1">
           <ExternalLink
-            href="https://github.com/pheralb/slug"
+            href="https://github.com/SpaceTimee/Frok-Slug"
             className={buttonVariants({
               variant: "ghost",
               size: "icon",

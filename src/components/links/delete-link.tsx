@@ -59,7 +59,7 @@ const DeleteLink = ({ link, trigger }: DeleteLinkProps) => {
       toast.success("Link deleted successfully.", {
         description: `The link /${link.slug} has been deleted.`,
       });
-    } catch (error) {
+    } catch {
       toast.error(
         "An error occurred while deleting the link. Please try again.",
       );

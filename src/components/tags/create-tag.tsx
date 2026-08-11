@@ -83,7 +83,7 @@ export function CreateTag(props: CreateTagProps) {
 
       form.reset();
       setOpen(false);
-    } catch (error) {
+    } catch {
       toast.error("An unexpected error has occurred. Please try again later.");
     } finally {
       setError(false);

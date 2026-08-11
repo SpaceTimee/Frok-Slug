@@ -36,7 +36,7 @@ const DeleteTag = ({ trigger, tag }: DeleteTagProps) => {
       toast.success("Link deleted successfully.", {
         description: `The tag ${tag.name} has been deleted.`,
       });
-    } catch (error) {
+    } catch {
       toast.error(
         "An error occurred while deleting the tag. Please try again.",
       );
