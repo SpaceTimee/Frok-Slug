@@ -62,12 +62,12 @@ export const DocumentationPages = [
 
 export const SocialPages = [
   {
-    name: "Contact",
+    name: "Contact Email",
     href: "mailto:Zeus6_6@163.com",
     icon: Mail,
   },
   {
-    name: "GitHub",
+    name: "GitHub Repo",
     href: "https://github.com/SpaceTimee/Frok-Slug",
     icon: GithubLogo,
   },

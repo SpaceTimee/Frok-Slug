@@ -41,17 +41,7 @@ export const urlFromServer = async (
       };
     }
 
-    await db.links.update({
-      where: {
-        id: getLinkFromServer.id,
-      },
-      data: {
-        clicks: {
-          increment: 1,
-        },
-        lastClicked: new Date(),
-      },
-    });
+    await db.$executeRaw`UPDATE "Links" SET "clicks" = "clicks" + 1, "lastClicked" = ${new Date()} WHERE "id" = ${getLinkFromServer.id}`;
 
     return {
       error: false,

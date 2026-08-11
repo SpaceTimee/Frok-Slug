@@ -117,19 +117,13 @@ export const createLink = async (
 export const updateLink = async (values: z.infer<typeof EditLinkSchema>) => {
   const currentUser = await auth();
 
-  if (!currentUser) {
+  if (!currentUser?.user?.id) {
     console.error("Not authenticated.");
     return null;
   }
 
   // Update link:
-  await db.links.update({
-    where: { id: values.id },
-    data: {
-      ...values,
-      creatorId: currentUser.user?.id,
-    },
-  });
+  await db.$executeRaw`UPDATE "Links" SET "url" = ${values.url}, "slug" = ${values.slug}, "description" = ${values.description ?? null} WHERE "id" = ${values.id} AND "creatorId" = ${currentUser.user.id}`;
 
   revalidatePath("/");
 
