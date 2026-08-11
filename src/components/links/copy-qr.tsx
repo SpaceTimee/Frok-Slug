@@ -59,7 +59,7 @@ const CopyQR = ({ linkInfo }: CopyQRProps) => {
         <DialogDescription>{linkInfo.description}</DialogDescription>
       </DialogHeader>
       <div className="my-3 flex flex-col items-center justify-center space-y-3 overflow-hidden">
-        <div className="rounded-lg border border-neutral-100 p-2 shadow-md dark:border-neutral-800">
+        <div className="rounded-md border border-neutral-200 bg-white p-2 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
           <QRCode
             id="qr-code"
             size={128}

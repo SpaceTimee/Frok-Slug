@@ -23,19 +23,15 @@ const Header = () => {
       <div
         className={cn("flex w-full items-center justify-between", "container")}
       >
-        <div className="flex items-center space-x-5">
-          <div className="flex items-center space-x-1 pr-1 md:pr-4">
-            <Link
-              href="/"
-              className="flex items-center space-x-3 transition-opacity hover:opacity-80 rtl:space-x-reverse"
-            >
-              <Logo width={30} />
-              <span className="self-center whitespace-nowrap text-lg font-medium tracking-tight dark:text-white">
-                Frok Slug
-              </span>
-            </Link>
-          </div>
-        </div>
+        <Link
+          href="/"
+          className="flex items-center space-x-3 transition-opacity hover:opacity-80"
+        >
+          <Logo width={30} />
+          <span className="self-center whitespace-nowrap text-lg font-medium tracking-tight dark:text-white">
+            Frok Slug
+          </span>
+        </Link>
         <div className="flex items-center space-x-1">
           <ExternalLink
             href="https://github.com/SpaceTimee/Frok-Slug"
